@@ -1,5 +1,5 @@
-// var MyContract = artifacts.require("./MyContract.sol");
+const Virus = artifacts.require("../contracts/Virus.sol");
 
 module.exports = function(deployer) {
-  // deployer.deploy(MyContract);
+  deployer.deploy(Virus);
 };
