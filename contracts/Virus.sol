@@ -1,7 +1,8 @@
 pragma solidity ^0.5.4;
 
+import "./AuthenticatedTracker.sol";
 
-contract Virus {
+contract Virus is AuthenticatedTracker {
 
   // Struct containing a vaccines information. Could also be made into a contract
   struct VaccineData{
@@ -16,10 +17,11 @@ contract Virus {
   //TODO: Add RBAC to restrict who can add a Vaccine
   function addVaccine(
     address vaccine,
-    string memory vaccineName,
-    string memory ipfsHash
+    string calldata vaccineName,
+    string calldata ipfsHash
   )
-    public
+    external
+    onlyAuthenticatedAccount
   {
     // Construct a new VaccineData struct with provided params and overwrite any previous entry for knownVaccines[vaccine]
     knownVaccines[vaccine] = VaccineData(ipfsHash, vaccineName);
