@@ -1,8 +1,7 @@
-pragma solidity 0.5.4;
+pragma solidity ^0.5.4;
 
 
-import "./libraries/openzeppelin-solidity/contracts/access/Roles.sol";
-
+import "openzeppelin-solidity/contracts/access/Roles.sol";
 
 contract AuthenticatedTracker {
   using Roles for Roles.Role;
@@ -15,7 +14,7 @@ contract AuthenticatedTracker {
   // On Deploy, the sender of the transaction will be added as an admin
   modifier onlyAuthenticatedAccount()
   {
-    require(isAuthenticatedAccount(msg.sender), "AuthenticatedAccount role required: caller must be authenticated to perform this operation");
+    require(isAuthenticatedAccount(msg.sender), "AuthenticatedAccount role required to perform this operation");
     _;
   }
 

@@ -1,10 +1,16 @@
 pragma solidity ^0.5.4;
 
 import "./AuthenticatedTracker.sol";
+import "openzeppelin-solidity/contracts/access/Roles.sol";
 
 contract Virus is AuthenticatedTracker {
 
-  // Struct containing a vaccines information. Could also be made into a contract
+function initializeGameJam(address admin)
+    public
+    payable
+  {
+    addAuthenticatedAccount(admin);
+  }  // Struct containing a vaccines information. Could also be made into a contract
   struct VaccineData{
     string ipfsHash;
     string vaccineName;
@@ -13,8 +19,7 @@ contract Virus is AuthenticatedTracker {
   mapping(address => VaccineData) public knownVaccines;
 
   event VaccineAdded(address vaccine);
-  
-  //TODO: Add RBAC to restrict who can add a Vaccine
+
   function addVaccine(
     address vaccine,
     string calldata vaccineName,
@@ -29,6 +34,6 @@ contract Virus is AuthenticatedTracker {
     //Alternatively we could try to assign each struct value one by one
     // knownVaccines[vaccine].vaccineName = vaccineName;
     // knownVaccines[vaccine].ipfsHash = ipfsHash;
-    emit VaccineAdded(vaccine);
+    // emit VaccineAdded(vaccine);
   }
 }
